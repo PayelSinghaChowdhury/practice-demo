@@ -34,7 +34,7 @@ steps:
   inputs:
     SonarCloud: 'SonarCloudToken_practicedemo'
     organization: 'PayelSinghaChowdhury'
-    projectKey: '8c202254e374983c1cd96dd9f0d277227e180b1b'
+    projectKey: '693cc4313676570907faa0b02a03fb48b8fcef49'
 
 - task: SonarCloudAnalyze@1
   displayName: 'Run SonarCloud analysis'
