@@ -1,0 +1,44 @@
+# Maven with SonarCloud analysis
+# Build and run tests for Maven projects
+# and analyse on SonarCloud
+#
+# * If necessary, create an endpoint to connect to SonarCloud
+#
+# * Set the sonarCloudXXX variables below
+# 
+# * Add steps that publish symbols, save build artifacts, and more:
+# https://docs.microsoft.com/en-gb/azure/devops/pipelines/customize-pipeline?view=azure-devops
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: Maven@3
+  displayName: 'Execute Maven goal'
+  inputs:
+    mavenPomFile: 'pom.xml'
+    options: '-Dmaven.test.failure.ignore=true'
+    mavenOptions: '-Xmx3072m'
+    mavenVersionOption: 'Default'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.8'
+    jdkArchitectureOption: 'x64'
+    
+- task: SonarCloudPrepare@1
+  displayName: 'Prepare analysis configuration'
+  inputs:
+    SonarCloud: 'PayelSinghaChowdhury_practice-demo'
+    organization: 'PayelSinghaChowdhury'
+    projectKey: 'PayelSinghaChowdhury_practice-demo'
+
+- task: SonarCloudAnalyze@1
+  displayName: 'Run SonarCloud analysis'
+
+
+- task: SonarCloudPublish@1
+  displayName: 'Publish results on build summary'
+  inputs:
+    pollingTimeoutSec: '300'
