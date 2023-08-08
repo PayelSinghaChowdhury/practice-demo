@@ -1,4 +1,5 @@
 # Maven with SonarCloud analysis
+
 # Build and run tests for Maven projects
 # and analyse on SonarCloud
 #
@@ -16,16 +17,17 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- task: Maven@3
-  displayName: 'Execute Maven goal'
+- task: Maven@4
   inputs:
     mavenPomFile: 'pom.xml'
-    options: '-Dmaven.test.failure.ignore=true'
-    mavenOptions: '-Xmx3072m'
-    mavenVersionOption: 'Default'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
     javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.8'
-    jdkArchitectureOption: 'x64'
+    mavenVersionOption: 'Default'
+    mavenAuthenticateFeed: false
+    effectivePomSkip: false
+    sonarQubeRunAnalysis: true
+    sqMavenPluginVersionChoice: 'latest'
     
 - task: SonarCloudPrepare@1
   displayName: 'Prepare analysis configuration'
