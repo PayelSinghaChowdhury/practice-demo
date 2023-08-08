@@ -32,8 +32,8 @@ steps:
 - task: SonarCloudPrepare@1
   displayName: 'Prepare analysis configuration'
   inputs:
-    SonarCloud: 'payelschowdhury1988'
-    organization: 'payelschowdhury1988'
+    SonarCloud: 'PayelSinghaChowdhury'
+    organization: 'PayelSinghaChowdhury'
     projectKey: '8c202254e374983c1cd96dd9f0d277227e180b1b'
 
 - task: SonarCloudAnalyze@1
